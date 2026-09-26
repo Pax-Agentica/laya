@@ -36,7 +36,9 @@ export class Laya {
     private readonly ids: SpecialIds,
     /** where the bundle was loaded from */
     readonly modelDir: string,
-  ) {}
+    /** temperature buckets already reported as clamped, so the warning is printed once per instance */
+    private readonly warnedTemps: Set<string> = new Set(),
+  ) { }
 
   static async load(opts: LayaOptions = {}): Promise<Laya> {
     const modelDir = opts.modelDir ? path.resolve(opts.modelDir) : await ensureBundle(opts);
@@ -116,7 +118,17 @@ export class Laya {
     items.forEach((it, r) => {
       const qid = qids[r] as string;
       const k = it.markers.length;
-      const temp = this.config.temperature_by_options[tempBucket(it.qtype, k)] ?? this.config.temperature[it.qtype] ?? 1;
+      const bucket = tempBucket(it.qtype, k);
+      const raw = this.config.temperature_by_options?.[bucket] ?? this.config.temperature[it.qtype] ?? 1;
+      // The reference SDK clamps temperatures into [0.5, 5]: out-of-range values (like the checkpoint's
+      // choice:11+=0.1006) would otherwise inflate confidence into near one-hot answers.
+      const temp = Math.min(5, Math.max(0.5, raw));
+      if (temp !== raw && !this.warnedTemps.has(bucket)) {
+        this.warnedTemps.add(bucket);
+        console.warn(
+          `laya: temperature ${bucket}=${raw} is outside [0.5, 5] and was clamped to ${temp}; treat confidence from this bucket as uncalibrated`,
+        );
+      }
       const p = softmax(Array.from(logits.subarray(r * K, r * K + k), (v) => v / temp));
       const ext = { act_probability: actData[r * nAct] ?? 0 };
       const q = it.q;

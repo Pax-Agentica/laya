@@ -1,3 +1,4 @@
+tmp/
 node_modules/
 dist/
 onnx/laya.onnx
@@ -5,3 +6,12 @@ onnx/laya.onnx.data
 export/model/
 export/.venv/
 .DS_Store
+
+# Large model weight artifacts (keep configs, tokenizers and scripts tracked)
+*.safetensors
+*.onnx
+*.onnx.data
+
+# Python bytecode
+__pycache__/
+*.pyc

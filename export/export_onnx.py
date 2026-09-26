@@ -38,7 +38,8 @@ class Wrapper(torch.nn.Module):
         return logits, torch.softmax(act.float(), -1)
 
 
-w = Wrapper(model)
+# eval() so dropout cannot leak into the exported graph; grad still stays enabled for the export below
+w = Wrapper(model).eval()
 B, L, K = 2, 40, 4
 ex = (
     torch.randint(5, 1000, (B, L)),
@@ -63,8 +64,10 @@ prog.save(out, external_data=False)
 
 # ship the tokenizer + calibration config next to the graph
 shutil.copytree(os.path.join(model_dir, "tokenizer"), os.path.join(out_dir, "tokenizer"), dirs_exist_ok=True)
-json.dump({k: cfg[k] for k in ("max_len", "head_max_len", "temperature", "temperature_by_options")},
-          open(os.path.join(out_dir, "laya_config.json"), "w"), indent=1)
+# a fine-tuned checkpoint fits one temperature per question type and drops temperature_by_options, so
+# write whichever calibration keys the checkpoint actually carries
+calib_keys = [k for k in ("max_len", "head_max_len", "temperature", "temperature_by_options") if k in cfg]
+json.dump({k: cfg[k] for k in calib_keys}, open(os.path.join(out_dir, "laya_config.json"), "w"), indent=1)
 
 # parity check
 import onnxruntime as ort  # noqa: E402

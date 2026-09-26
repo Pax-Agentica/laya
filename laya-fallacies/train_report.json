@@ -1,0 +1,80 @@
+{
+  "args": {
+    "task_file": "scripts/fallacies.json",
+    "dataset": null,
+    "dataset_revision": null,
+    "split": "train",
+    "text_column": null,
+    "label_column": null,
+    "model_dir": null,
+    "base_revision": null,
+    "output_dir": "./laya-fallacies",
+    "device": "auto",
+    "amp": false,
+    "epochs": 4,
+    "micro_batch": 8,
+    "grad_accum": 4,
+    "group_size": 4,
+    "lr_encoder": 2.5e-05,
+    "lr_head": 0.0001,
+    "weight_decay": 0.01,
+    "sigma_start": 0.4,
+    "sigma_end": 0.1,
+    "seed": 42,
+    "max_items": 0,
+    "calib_max": 400,
+    "val_frac": 0.1,
+    "negative_file": "/Users/brian/git/receptron/laya/scripts/negatives.jsonl",
+    "dry_run": false,
+    "dry_steps": 5
+  },
+  "base_model": "convaiinnovations/laya",
+  "base_revision": "1c5edc17a7acd8701df6fc341c0d179f1c62c982",
+  "base_model_dir": "/Users/brian/.cache/huggingface/hub/models--convaiinnovations--laya/snapshots/1c5edc17a7acd8701df6fc341c0d179f1c62c982",
+  "dataset": "tasksource/logical-fallacy",
+  "dataset_revision": "37e9b0537a86e72e9eaf6ee8c9a27d872a944103",
+  "env": {
+    "laya": "0.3.5",
+    "torch": "2.14.0",
+    "transformers": "5.17.0",
+    "datasets": "5.0.1",
+    "safetensors": "0.8.0",
+    "numpy": "2.5.3"
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "avg_loss": 1.8874343175237829
+    },
+    {
+      "epoch": 2,
+      "avg_loss": 1.4494284582138062
+    },
+    {
+      "epoch": 3,
+      "avg_loss": 1.0252089227058672
+    },
+    {
+      "epoch": 4,
+      "avg_loss": 0.7733529032360423
+    }
+  ],
+  "fitted_temperatures": [
+    2.1666,
+    1.2,
+    1.2
+  ],
+  "val": {
+    "accuracy": 0.6419753086419753,
+    "mean_argmax_confidence": 0.7960100473199853,
+    "n": 243
+  },
+  "test": {
+    "accuracy": 0.5088062622309197,
+    "mean_argmax_confidence": 0.6977363426799643,
+    "n": 511
+  },
+  "train_items": 2196,
+  "device": "mps",
+  "amp": false
+}

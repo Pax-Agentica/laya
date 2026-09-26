@@ -1,0 +1,38 @@
+{
+    "dataset": "tasksource/logical-fallacy",
+    "revision": "37e9b0537a86e72e9eaf6ee8c9a27d872a944103",
+    "text_column": "source_article",
+    "label_column": "logical_fallacies",
+    "instructions": "which logical fallacy, if any, does this statement commit?",
+    "taxonomy": {
+        "none": "no logical fallacy",
+        "ad_hominem": "attacking the opponent instead of their argument",
+        "ad_populum": "appealing to popularity instead of the merits",
+        "appeal_to_emotion": "manipulating emotion instead of engaging with the argument",
+        "circular_reasoning": "assuming the conclusion in the premises",
+        "equivocation": "using a word in two different senses",
+        "fallacy_of_credibility": "leaning on the source's credibility instead of evidence",
+        "fallacy_of_extension": "stretching the opponent's claim beyond what it says",
+        "fallacy_of_logic": "the reasoning structure itself is invalid",
+        "fallacy_of_relevance": "diverting to an issue that is irrelevant",
+        "false_causality": "assuming causation from correlation",
+        "false_dilemma": "presenting only two options when others exist",
+        "faulty_generalization": "concluding from too little evidence",
+        "intentional": "rejecting the argument because of the opponent's intent"
+    },
+    "label_map": {
+        "ad hominem": "ad_hominem",
+        "ad populum": "ad_populum",
+        "appeal to emotion": "appeal_to_emotion",
+        "circular reasoning": "circular_reasoning",
+        "equivocation": "equivocation",
+        "fallacy of credibility": "fallacy_of_credibility",
+        "fallacy of extension": "fallacy_of_extension",
+        "fallacy of logic": "fallacy_of_logic",
+        "fallacy of relevance": "fallacy_of_relevance",
+        "false causality": "false_causality",
+        "false dilemma": "false_dilemma",
+        "faulty generalization": "faulty_generalization",
+        "intentional": "intentional"
+    }
+}

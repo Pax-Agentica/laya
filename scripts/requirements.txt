@@ -1,0 +1,14 @@
+# Exact environment used for the laya-fallacies fine-tune (2026-09-26, Apple M1 Pro / MPS).
+#
+# `laya` supplies build_model, build_sequence, render_options and proper_reward, so pinning
+# it pins the model architecture and the RL reward function, not just the runtime. Bumping
+# this version can change training results even with every seed fixed.
+laya==0.3.5
+torch==2.14.0
+transformers==5.17.0
+datasets==5.0.1
+safetensors==0.8.0
+numpy==2.5.3
+huggingface_hub==1.32.0
+
+# The ONNX export toolchain (export/export_onnx.py) is documented separately in README.md.

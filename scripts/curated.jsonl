@@ -1,0 +1,136 @@
+{"statement": "calling me an idiot is an ad hominem attack, and it says nothing about the survey.", "label": "none"}
+{"statement": "that was a personal attack, not a rebuttal, and the record should show it.", "label": "none"}
+{"statement": "the senator's speech was full of ad hominem attacks on his opponent.", "label": "none"}
+{"statement": "pointing out that an argument is circular is not itself a fallacy.", "label": "none"}
+{"statement": "she described the tweet as a personal attack rather than as an argument.", "label": "none"}
+{"statement": "accusing a journalist of bias is not, by itself, an argument about the facts.", "label": "none"}
+{"statement": "the moderator noted that both candidates kept attacking each other's character.", "label": "none"}
+{"statement": "we should document every personal attack in the thread instead of replying.", "label": "none"}
+{"statement": "the review criticises the author's method, not the author.", "label": "none"}
+{"statement": "he pointed out the appeal to emotion in the ad, and then answered the ad's actual claim.", "label": "none"}
+{"statement": "identifying a slippery slope argument is different from making one.", "label": "none"}
+{"statement": "the judge explained that the lawyer's question was leading, then ruled it inadmissible.", "label": "none"}
+{"statement": "the referee called the tackle dangerous and showed a yellow card.", "label": "none"}
+{"statement": "the editor flagged the headline as sensational and asked for a source.", "label": "none"}
+{"statement": "she called the reasoning flawed and showed exactly where the premises break.", "label": "none"}
+{"statement": "the teacher marked the conclusion as unsupported and listed the missing evidence.", "label": "none"}
+{"statement": "he accused the company of false advertising and cited the regulator's ruling.", "label": "none"}
+{"statement": "the coach told the team to stop blaming the referee and review their own mistakes.", "label": "none"}
+{"statement": "correlation is not causation, so we should run a controlled experiment.", "label": "none"}
+{"statement": "ice cream sales and drownings both rise in summer, but neither causes the other.", "label": "none"}
+{"statement": "the link between the two variables may be real, but the study has not established cause.", "label": "none"}
+{"statement": "we changed two things at once, so the experiment cannot say which one caused the improvement.", "label": "none"}
+{"statement": "the team found a correlation and is designing a follow-up to test causation.", "label": "none"}
+{"statement": "my opponent wants a small fee on plastic bags, which means she wants to tax every purchase we make.", "label": "fallacy_of_extension"}
+{"statement": "he argued for raising the driving age by one year, which really means he wants to ban teenagers from the road altogether.", "label": "fallacy_of_extension"}
+{"statement": "you want stricter gun checks, so you clearly want to disarm every law-abiding citizen.", "label": "fallacy_of_extension"}
+{"statement": "they proposed shortening the school day by twenty minutes, which is just the first step toward abolishing schools.", "label": "fallacy_of_extension"}
+{"statement": "she supports a tax on sugary drinks, which means she wants the government to control everything we eat.", "label": "fallacy_of_extension"}
+{"statement": "he asked for a one-year pause on the project, which proves he wants to kill it forever.", "label": "fallacy_of_extension"}
+{"statement": "since they criticised one clause of the bill, they obviously want the whole bill to fail.", "label": "fallacy_of_extension"}
+{"statement": "she said the policy needs reform, so what she really wants is to scrap it completely.", "label": "fallacy_of_extension"}
+{"statement": "wanting to limit screen time for toddlers means wanting to live without technology.", "label": "fallacy_of_extension"}
+{"statement": "if we allow one bike lane today, tomorrow they will pave over every road, and soon nobody will be able to drive anywhere.", "label": "fallacy_of_extension"}
+{"statement": "once we ban one plastic item, all plastic gets banned, and then all packaging disappears.", "label": "fallacy_of_extension"}
+{"statement": "if students can wear any shoes, next they will demand any clothes, and before long the school will have no standards at all.", "label": "fallacy_of_extension"}
+{"statement": "you support one environmental rule, so you must want to shut down every factory in the country.", "label": "fallacy_of_extension"}
+{"statement": "they asked to review the contract, so they are obviously trying to stall the deal forever.", "label": "fallacy_of_extension"}
+{"statement": "she wants helmets for cyclists, which means she wants cycling banned altogether.", "label": "fallacy_of_extension"}
+{"statement": "if the city adds one bus lane, soon no cars will be allowed downtown at all.", "label": "fallacy_of_extension"}
+{"statement": "he proposed banning phones in class, which is the same as banning phones everywhere.", "label": "fallacy_of_extension"}
+{"statement": "saying the policy needs exceptions means saying the policy is worthless.", "label": "fallacy_of_extension"}
+{"statement": "they want calorie labels on menus, so they think restaurants should be shut down.", "label": "fallacy_of_extension"}
+{"statement": "if we lower the voting age, next we will have toddlers voting and democracy will collapse.", "label": "fallacy_of_extension"}
+{"statement": "he says students should not care about clothes at all, so his plan is to erase fashion from schools entirely.", "label": "fallacy_of_extension"}
+{"statement": "if we require uniforms this year, next we will require identical haircuts, and soon the school will control every part of our lives.", "label": "fallacy_of_extension"}
+{"statement": "sales went up after we repainted the store, so the new paint colour is what drove the sales.", "label": "false_causality"}
+{"statement": "the team started winning right after i bought this hat, so the hat is the reason.", "label": "false_causality"}
+{"statement": "he became a vegetarian and then got promoted, so the diet caused the promotion.", "label": "false_causality"}
+{"statement": "crime fell after the mayor took office, so the mayor caused the fall.", "label": "false_causality"}
+{"statement": "children who eat breakfast do better in school, so breakfast makes children smart.", "label": "false_causality"}
+{"statement": "since the rooster crows just before sunrise, the crowing makes the sun rise.", "label": "false_causality"}
+{"statement": "people who live near power lines get sick more often, so the power lines cause the sickness.", "label": "false_causality"}
+{"statement": "my luck changed the day i changed my phone wallpaper, so the wallpaper brings me luck.", "label": "false_causality"}
+{"statement": "the town opened a new park and the next year fewer people moved away, so the park made people stay.", "label": "false_causality"}
+{"statement": "students with laptops score higher, so giving every student a laptop will raise scores.", "label": "false_causality"}
+{"statement": "the stock rose the day after the ceo tweeted, so the tweet caused the rise.", "label": "false_causality"}
+{"statement": "countries with more chocolate also have more nobel prizes, so chocolate makes you a genius.", "label": "false_causality"}
+{"statement": "he switched to a standing desk and his back pain went away, so the desk cured it.", "label": "false_causality"}
+{"statement": "the baby slept through the night after we played that song, so the song made the baby sleep.", "label": "false_causality"}
+{"statement": "homes near the new stadium went up in value, so the stadium made the whole neighbourhood rich.", "label": "false_causality"}
+{"statement": "she started meditating and then got a raise, so meditation causes promotions.", "label": "false_causality"}
+{"statement": "dieters who use the app lose weight, so the app causes the weight loss.", "label": "false_causality"}
+{"statement": "the store's sales drop every time the manager goes on holiday, so the manager's absence causes the drop.", "label": "false_causality"}
+{"statement": "every country with great schools requires uniforms, so uniforms are what make schools great.", "label": "false_causality"}
+{"statement": "my grandfather smoked all his life and lived to ninety, so smoking is not dangerous.", "label": "faulty_generalization"}
+{"statement": "the first two taxis we took were late, so the taxi service in this city is always late.", "label": "faulty_generalization"}
+{"statement": "i met three friendly tourists from that country, so everyone there must be friendly.", "label": "faulty_generalization"}
+{"statement": "the app crashed twice on my phone, so it is broken for all users.", "label": "faulty_generalization"}
+{"statement": "my friend's startup failed, so most startups are doomed.", "label": "faulty_generalization"}
+{"statement": "we surveyed five people in the office and they all agreed, so the whole company agrees.", "label": "faulty_generalization"}
+{"statement": "one restaurant got busier after hiring a social media manager, so hiring one always pays off.", "label": "faulty_generalization"}
+{"statement": "the first ten reviews of the phone are negative, so the phone is a failure.", "label": "faulty_generalization"}
+{"statement": "my cousin wore a uniform for a year and enjoyed it, so every student would enjoy wearing one.", "label": "faulty_generalization"}
+{"statement": "everyone i know who tried the diet regained the weight, so the diet never works.", "label": "faulty_generalization"}
+{"statement": "the train was on time twice this week, so it is always on time now.", "label": "faulty_generalization"}
+{"statement": "both dogs i have owned loved the water, so all dogs love the water.", "label": "faulty_generalization"}
+{"statement": "the new checkout crashed during the one busy hour we tested, so it will crash every day.", "label": "faulty_generalization"}
+{"statement": "my sister's class loved the field trip, so every class in the district will love it.", "label": "faulty_generalization"}
+{"statement": "the three restaurants we visited were empty on monday, so the city's restaurant scene is dying.", "label": "faulty_generalization"}
+{"statement": "two neighbours say the new junction is dangerous, so the junction must be a death trap.", "label": "faulty_generalization"}
+{"statement": "millions of people buy this brand, so it must be the best.", "label": "ad_populum"}
+{"statement": "everyone agrees the film is great, so it is great.", "label": "ad_populum"}
+{"statement": "it is the best-selling car in the country, so it is the best car.", "label": "ad_populum"}
+{"statement": "everyone at school is doing it, so it cannot be wrong.", "label": "ad_populum"}
+{"statement": "the petition has ten thousand signatures, so the policy it demands must be right.", "label": "ad_populum"}
+{"statement": "most voters support the plan, so the plan is correct.", "label": "ad_populum"}
+{"statement": "billions of flies eat dung, so dung must be delicious.", "label": "ad_populum"}
+{"statement": "the video has a million likes, so the advice in it is sound.", "label": "ad_populum"}
+{"statement": "she only opposes the bill because her company lobbies against it, so her arguments can be dismissed.", "label": "intentional"}
+{"statement": "he backs the tax cut because he is rich, so his reasoning about the economy is worthless.", "label": "intentional"}
+{"statement": "the union leader supports the policy because it helps her members, so her arguments count for nothing.", "label": "intentional"}
+{"statement": "the professor endorses the textbook because he wrote it, so his praise is meaningless.", "label": "intentional"}
+{"statement": "the landlord is against rent control because he owns apartments, so his arguments are self-serving noise.", "label": "intentional"}
+{"statement": "she supports the stadium because her brother's firm is building it, so her arguments can be ignored.", "label": "intentional"}
+{"statement": "the ceo praises the merger because he gets a bonus, so his case for it is worthless.", "label": "intentional"}
+{"statement": "they defend the fee because they collect it, so their defence deserves no hearing.", "label": "intentional"}
+{"statement": "the scientist is a nobel laureate, so his opinion on the election must be right.", "label": "fallacy_of_credibility"}
+{"statement": "an actor with ten million followers says the medicine works, so it works.", "label": "fallacy_of_credibility"}
+{"statement": "the ceo says the product is the best on the market, and he would know, so it is.", "label": "fallacy_of_credibility"}
+{"statement": "the famous athlete endorsed the book, so the book must be good.", "label": "fallacy_of_credibility"}
+{"statement": "she is a famous economist, so her views on climate science should settle the debate.", "label": "fallacy_of_credibility"}
+{"statement": "either we abolish uniforms entirely, or we force children into identical outfits; there is no middle ground.", "label": "false_dilemma"}
+{"statement": "you either support the war or you hate your country.", "label": "false_dilemma"}
+{"statement": "either the economy grows every quarter or the country is in collapse.", "label": "false_dilemma"}
+{"statement": "we can either cut all arts funding or bankrupt the city.", "label": "false_dilemma"}
+{"statement": "if you are not with us, you are against us.", "label": "false_dilemma"}
+{"statement": "either you vote for the incumbents or the town will have no schools at all.", "label": "false_dilemma"}
+{"statement": "only man is rational. no woman is a man. therefore no woman is rational.", "label": "equivocation"}
+{"statement": "a feather is light. what is light cannot be dark. so a feather cannot be dark.", "label": "equivocation"}
+{"statement": "the sign said 'fine for parking here', so it is fine to park here.", "label": "equivocation"}
+{"statement": "nothing is better than eternal happiness. a ham sandwich is better than nothing. so a ham sandwich is better than eternal happiness.", "label": "equivocation"}
+{"statement": "'right' means correct, and the suspect had a right to counsel, so the suspect's counsel must be correct.", "label": "equivocation"}
+{"statement": "we know the book is true because the book says it is true.", "label": "circular_reasoning"}
+{"statement": "the drug works because it has healing properties, and we know it has healing properties because the drug works.", "label": "circular_reasoning"}
+{"statement": "the president is trustworthy because he never lies, and we know he never lies because he is trustworthy.", "label": "circular_reasoning"}
+{"statement": "we should believe the doctrine because the doctrine tells us to believe it.", "label": "circular_reasoning"}
+{"statement": "think of the children: if you vote against the bill you are breaking their hearts.", "label": "appeal_to_emotion"}
+{"statement": "a vote against the funding is a vote against every cancer patient in this hospital.", "label": "appeal_to_emotion"}
+{"statement": "how can you oppose the memorial when so many families are still grieving?", "label": "appeal_to_emotion"}
+{"statement": "if you care about the orphans you will sign the petition today.", "label": "appeal_to_emotion"}
+{"statement": "only a heartless person could cut this program; imagine the faces of the families it feeds.", "label": "appeal_to_emotion"}
+{"statement": "the players have bled for this club, so a true fan backs them no matter what.", "label": "appeal_to_emotion"}
+{"statement": "your plan to fix the bridge sounds fine, but have you seen the mayor's new haircut?", "label": "fallacy_of_relevance"}
+{"statement": "the defendant is guilty because his brother once went to jail.", "label": "fallacy_of_relevance"}
+{"statement": "we are discussing the budget, and someone should mention that the councillor's garden is overgrown.", "label": "fallacy_of_relevance"}
+{"statement": "your argument about emissions is interesting, but what about your own car?", "label": "fallacy_of_relevance"}
+{"statement": "before we vote on the merger, remember the founder's son failed his exams.", "label": "fallacy_of_relevance"}
+{"statement": "all cats are animals; some animals are pets; therefore some cats are pets.", "label": "fallacy_of_logic"}
+{"statement": "if it rains the street is wet. the street is wet, so it rained.", "label": "fallacy_of_logic"}
+{"statement": "everyone who passed studied. mia studied, so mia passed.", "label": "fallacy_of_logic"}
+{"statement": "some dogs are brown. some brown things are furniture. so some dogs are furniture.", "label": "fallacy_of_logic"}
+{"statement": "if you are a bird you can fly. you can fly, so you are a bird.", "label": "fallacy_of_logic"}
+{"statement": "only a fool would believe your numbers.", "label": "ad_hominem"}
+{"statement": "your proposal is exactly what an idiot would propose.", "label": "ad_hominem"}
+{"statement": "you are too stupid to understand the data, so the data must be wrong.", "label": "ad_hominem"}
+{"statement": "you failed math in school, so your budget numbers are worthless.", "label": "ad_hominem"}

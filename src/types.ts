@@ -65,5 +65,6 @@ export interface LayaConfig {
   max_len: number;
   head_max_len: number;
   temperature: [number, number, number];
-  temperature_by_options: Record<string, number>;
+  /** per-(type, option count) overrides; a fine-tuned checkpoint fits one temperature per type and omits this */
+  temperature_by_options?: Record<string, number>;
 }
