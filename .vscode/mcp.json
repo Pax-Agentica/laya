@@ -1,0 +1,8 @@
+{
+    "servers": {
+        "hf-mcp-server": {
+            "type": "http",
+            "url": "https://huggingface.co/mcp?login"
+        }
+    }
+}
