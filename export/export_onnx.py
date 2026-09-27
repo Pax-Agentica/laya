@@ -24,6 +24,9 @@ from safetensors.torch import load_file  # noqa: E402
 cfg = json.load(open(os.path.join(model_dir, "rl_agent_config.json")))
 model = build_model(cfg, encoder_dir=os.path.join(model_dir, "encoder"))
 model.load_state_dict(load_file(os.path.join(model_dir, "model.safetensors")), strict=True)
+# a rolling checkpoint is saved in fp16; cast so the graph keeps the fp32 outputs promised above,
+# and so a bundle exported from a rolling checkpoint matches one exported from a final fp32 model
+model = model.float()
 model.eval()
 model.encoder.config.reference_compile = False
 
@@ -60,7 +63,9 @@ prog = torch.onnx.export(
     dynamic_shapes={"input_ids": {0: batch, 1: seq}, "attention_mask": {0: batch, 1: seq},
                     "marker_pos": {0: batch, 1: opts}, "marker_mask": {0: batch, 1: opts}, "qtype": {0: batch}},
 )
-prog.save(out, external_data=False)
+prog.save(out, external_data=True)
+# external data keeps the graph small (laya.onnx) and the fp32 weights in laya.onnx.data; that is the
+# layout BUNDLE_FILES in src/download.ts expects, and the layout the published bundles use
 
 # ship the tokenizer + calibration config next to the graph
 shutil.copytree(os.path.join(model_dir, "tokenizer"), os.path.join(out_dir, "tokenizer"), dirs_exist_ok=True)

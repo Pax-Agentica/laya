@@ -9,6 +9,8 @@ Usage:
   export/.venv/bin/python scripts/finetune.py --task-file scripts/fallacies.json --dry-run
   export/.venv/bin/python scripts/finetune.py --task-file scripts/fallacies.json \
       --output-dir ./laya-fallacies
+  export/.venv/bin/python scripts/finetune.py --task-file scripts/fallacies.json \
+      --model-dir ./laya-fallacies --output-dir ./laya-fallacies-final --finalize-only
   export/.venv/bin/python export/export_onnx.py ./laya-fallacies ./onnx-fallacies
   LAYA_MODEL_DIR=./onnx-fallacies bun examples/debate.ts
 
@@ -66,6 +68,9 @@ def parse_args():
                    help="jsonl of {\"statement\": ..., \"label\": <taxonomy key>} mixed into the training data; use 'none' to disable")
     p.add_argument("--dry-run", action="store_true", help="time a few real training steps and exit")
     p.add_argument("--dry-steps", type=int, default=5)
+    p.add_argument("--finalize-only", action="store_true",
+                   help="skip training; only fit calibration temperatures, save the final fp32 model and evaluate. "
+                        "Use to finish a run that was interrupted after its last epoch's checkpoint")
     return p.parse_args()
 
 
@@ -395,7 +400,10 @@ def main():
               "env": env_versions(), "epochs": [], "fitted_temperatures": None, "val": None, "test": None,
               "train_items": len(train_items), "device": device, "amp": bool(scaler)}
     t0 = time.time()
-    for epoch in range(args.epochs):
+    # --finalize-only finishes a run interrupted after its last checkpoint: no training, just the
+    # calibration fit, the final fp32 save and the evaluations below.
+    epochs_to_run = 0 if args.finalize_only else args.epochs
+    for epoch in range(epochs_to_run):
         random.seed(42 + epoch)
         random.shuffle(train_items)
         epoch_loss, n_batches = 0.0, 0

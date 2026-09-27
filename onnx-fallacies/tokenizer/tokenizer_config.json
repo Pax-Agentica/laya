@@ -1,8 +1,6 @@
 {
-  "backend": "tokenizers",
   "clean_up_tokenization_spaces": true,
   "cls_token": "[CLS]",
-  "is_local": true,
   "local_files_only": false,
   "mask_token": "[MASK]",
   "model_input_names": [
@@ -12,6 +10,6 @@
   "model_max_length": 8192,
   "pad_token": "[PAD]",
   "sep_token": "[SEP]",
-  "tokenizer_class": "TokenizersBackend",
+  "tokenizer_class": "PreTrainedTokenizerFast",
   "unk_token": "[UNK]"
 }

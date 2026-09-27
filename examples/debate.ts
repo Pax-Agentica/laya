@@ -133,10 +133,11 @@ bob is wrong about the evidence and wrong about the policy, and that is all a sc
 you have not shown either. if we want to claim uniforms help, we need an experiment that compares like with like, which nobody here has offered.
 `;
 
-// load the model (set LAYA_MODEL_DIR=./onnx to use a local export instead of downloading).
+// loads the fallacy bundle by default; LAYA_MODEL_DIR uses a local export instead, and LAYA_REPO /
+// LAYA_SUBFOLDER / LAYA_REVISION pick another published bundle.
 const laya = await laya_class.load({
     modelDir: process.env.LAYA_MODEL_DIR,
-    repo: process.env.LAYA_REPO,
+    repo: process.env.LAYA_REPO ?? "BryanSnappCTO/laya-fallacies-onnx",
     subfolder: process.env.LAYA_SUBFOLDER,
     revision: process.env.LAYA_REVISION,
     onProgress: ({ file, received, total }) => {

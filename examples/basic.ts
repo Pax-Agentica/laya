@@ -1,8 +1,9 @@
 import { Laya } from "../src/index.js";
 
-// Pass { modelDir: "./onnx" } to use a local export instead of the Hugging Face bundle.
+// Pass { modelDir: "./onnx" } to use a local export, or LAYA_REPO to load another published bundle.
 const laya = await Laya.load({
   modelDir: process.env.LAYA_MODEL_DIR,
+  repo: process.env.LAYA_REPO,
   onProgress: ({ file, received, total }) => {
     if (total) process.stderr.write(`\r${file}: ${((received / total) * 100).toFixed(0)}%   `);
   },

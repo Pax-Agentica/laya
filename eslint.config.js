@@ -5,7 +5,8 @@ import sonarjs from "eslint-plugin-sonarjs";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
 
 export default tseslint.config(
-  { ignores: ["dist/**", "node_modules/**", "onnx/**", "export/**"] },
+  // `tmp/` is scratch (and git-ignored); linting it only ever reports on throwaway scripts.
+  { ignores: ["dist/**", "node_modules/**", "onnx/**", "export/**", "tmp/**"] },
 
   {
     linterOptions: {

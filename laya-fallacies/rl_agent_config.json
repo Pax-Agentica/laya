@@ -11,7 +11,7 @@
   "amp_dtype": "bf16",
   "model_name": "laya-fallacies",
   "temperature": [
-    2.166565418243408,
+    1.876949429512024,
     1.2,
     1.2
   ],
