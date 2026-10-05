@@ -170,6 +170,31 @@ Every question of one `systemOne` call is batched into a single run; a call with
 three questions takes about 140 ms on an Apple M1 Pro CPU once the model is
 warm.
 
+### Temperature and confidence
+
+Every question type and option count has a temperature bucket in
+`laya_config.json`. The logits are divided by that bucket's temperature before
+the softmax, so the value only rescales confidence: it never changes the argmax,
+which is the chosen answer.
+
+`laya.config` exposes the temperatures exactly as they appear in the checkpoint,
+so it can hold out-of-range values. The published bundle shipped
+`choice:11+ = 0.10058280825614929` against a range of 1.0–1.98 everywhere else
+(receptron/laya#10). The runtime clamps every temperature into `[0.5, 5]` — the
+same range upstream Python laya enforces — at the point of use, and prints one
+warning per affected bucket per instance. `config` therefore reports the raw
+values, which are not necessarily the values applied.
+
+```ts
+const laya = await Laya.load();
+laya.config.temperature_by_options?.["choice:11+"]; // raw checkpoint value, not necessarily the value applied
+laya.config.temperature_by_options ??= {};
+laya.config.temperature_by_options["choice:11+"] = 1.03; // overrides are clamped to [0.5, 5] too
+```
+
+The ONNX bundle ships a refit `choice:11+`; see
+[`onnx/README.md`](./onnx/README.md) for the provenance.
+
 ## Exporting the ONNX bundle yourself
 
 `export/export_onnx.py` turns the Hugging Face checkpoint (ModernBERT encoder +
@@ -191,14 +216,25 @@ Then `Laya.load({ modelDir: "./onnx" })`. The bundle is the five files listed in
 
 ## Limits
 
-- Each question's options must fit in `head_max_len` (192) tokens; `systemOne`
-  throws otherwise. Fewer than about 20 options per `choice` question is the
-  model's own recommendation.
-- The state is truncated to `max_len` (512 tokens for the English checkpoint)
-  after the question header.
-- A JSON state is serialized like Python's `json.dumps(ensure_ascii=False)` so
-  that tokens match the reference implementation; non-integer numbers may format
-  differently between JS and Python.
+1. Each question's options must fit in `head_max_len` (192) tokens; `systemOne`
+   throws otherwise. Fewer than about 20 options per `choice` question is the
+   model's own recommendation.
+2. The state is truncated to `max_len` (512 tokens for the English checkpoint)
+   after the question header.
+3. A JSON state is serialized like Python's `json.dumps(ensure_ascii=False)` so
+   that tokens match the reference implementation; non-integer numbers may
+   format differently between JS and Python.
+4. Windows GPU inference is not supported: `onnxruntime-node` has no CUDA
+   execution provider, and the `dml` (DirectML) provider fails on this graph's
+   `Reshape` node with "The parameter is incorrect" at every graph optimization
+   level. The same ONNX file runs under Python `onnxruntime-gpu` with
+   `CUDAExecutionProvider` (receptron/laya#10), so the package is CPU-only on
+   Windows today.
+5. For "which on-screen item should be clicked next" questions, putting only the
+   goal in `state` (for example `"User's goal: ..."`) and using bare option
+   labels as `criteria` measured 11/12 against 7/12 when `state` also listed the
+   items (receptron/laya#10). Treat that as guidance from a small sample rather
+   than a rule, and measure on your own questions.
 
 ## Diagrams
 

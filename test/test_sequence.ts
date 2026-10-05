@@ -1,6 +1,18 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildSequence, confidenceFromProbs, pyJsonDumps, renderOptions, softmax, tempBucket, toInternal, type SpecialIds } from "../src/sequence.js";
+import {
+  buildSequence,
+  clampTemperature,
+  confidenceFromProbs,
+  pyJsonDumps,
+  renderOptions,
+  softmax,
+  TEMP_MAX,
+  TEMP_MIN,
+  tempBucket,
+  toInternal,
+  type SpecialIds,
+} from "../src/sequence.js";
 
 const ids: SpecialIds = { cls: 1, sep: 2, mask: 3, pad: 0, maskTok: "[MASK]" };
 // one id per whitespace-separated word, so lengths are easy to reason about
@@ -91,4 +103,27 @@ test("tempBucket / softmax / confidence", () => {
   assert.ok(Math.abs(p.reduce((a, b) => a + b) - 1) < 1e-12);
   assert.ok(Math.abs(confidenceFromProbs(p)) < 1e-12);
   assert.equal(confidenceFromProbs([1, 0]), 1);
+});
+
+test("clampTemperature passes in-range temperatures through untouched", () => {
+  assert.equal(clampTemperature(1.98), 1.98);
+  assert.equal(clampTemperature(1.0), 1.0);
+  assert.equal(clampTemperature(TEMP_MIN), TEMP_MIN);
+  assert.equal(clampTemperature(TEMP_MAX), TEMP_MAX);
+});
+
+test("clampTemperature clamps the checkpoint's choice:11+ value up to the floor", () => {
+  assert.equal(clampTemperature(0.10058280825614929), TEMP_MIN);
+});
+
+test("clampTemperature clamps values above the ceiling down", () => {
+  assert.equal(clampTemperature(7), TEMP_MAX);
+});
+
+test("clampTemperature falls back for non-finite values instead of yielding NaN", () => {
+  assert.equal(Number.isNaN(clampTemperature(NaN)), false, "clampTemperature(NaN) must be a real number, not NaN");
+  assert.equal(clampTemperature(NaN), 1);
+  assert.equal(clampTemperature(Infinity), 1);
+  assert.equal(clampTemperature(-Infinity), 1);
+  assert.equal(clampTemperature(NaN, 1.5), 1.5);
 });

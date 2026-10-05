@@ -63,9 +63,18 @@ function sizeBucket(k: number): string {
 }
 
 /** Key for the per-cardinality temperature: a 2-option noul and a 20-option choice need different scaling. */
-export function tempBucket(qtype: number, k: number): string {
-  return `${QTYPE_NAMES[qtype]}:${sizeBucket(k)}`;
-}
+export const tempBucket = (qtype: number, k: number): string => `${QTYPE_NAMES[qtype]}:${sizeBucket(k)}`;
+
+export const TEMP_MIN = 0.5;
+export const TEMP_MAX = 5;
+
+/**
+ * Clamp a checkpoint temperature into [TEMP_MIN, TEMP_MAX], the range upstream laya (>= 0.3.5) enforces in
+ * `laya/common.py`. The published checkpoint ships `choice:11+ = 0.1005...`, which multiplies that bucket's
+ * logits by ~10 and returns near one-hot confidence. Non-finite values (NaN, Infinity, a non-numeric override)
+ * fall back instead of reaching softmax as NaN.
+ */
+export const clampTemperature = (raw: number, fallback = 1): number => (Number.isFinite(raw) ? Math.min(TEMP_MAX, Math.max(TEMP_MIN, raw)) : fallback);
 
 /** Jev-style confidence: 1 - normalized entropy of the answer distribution. */
 export function confidenceFromProbs(p: number[]): number {

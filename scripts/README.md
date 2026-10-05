@@ -175,9 +175,11 @@ here would remove the dependency entirely.
 
 ## Notes
 
-- The base checkpoint's `choice:11+` temperature is out of calibration range;
-  the JS runtime clamps it to `[0.5, 5]` with a warning, and the script refits
-  per-type temperatures after training anyway.
+- The base checkpoint's `choice:11+` temperature is out of calibration range and
+  still ships that way from the Hub; the JS runtime clamps it to `[0.5, 5]` with
+  a warning, the published ONNX bundle carries a refit value (see
+  [`onnx/README.md`](../onnx/README.md)), and this script still refits per-type
+  temperatures after training.
 - `tasksource/logical-fallacy` is the LOGIC dataset (Jin et al., 2022); its
   license is not clearly stated on the Hub — treat it as research-only. If you
   plan to publish fine-tuned weights, prefer a dataset with a clear licence

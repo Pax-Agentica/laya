@@ -4,7 +4,10 @@ Usage:  .venv/bin/python export_onnx.py [model_dir] [out_dir]
 Inputs : input_ids [B,L] int64, attention_mask [B,L] int64, marker_pos [B,K] int64, marker_mask [B,K] bool, qtype [B] int64
 Outputs: logits [B,K] float32 (uncalibrated; masked slots = -1e4), act_probs [B,2] float32
 """
+from __future__ import annotations
+
 import json
+import math
 import os
 import shutil
 import sys
@@ -29,6 +32,13 @@ model.load_state_dict(load_file(os.path.join(model_dir, "model.safetensors")), s
 model = model.float()
 model.eval()
 model.encoder.config.reference_compile = False
+
+
+def clamp_temperature(value: float, /, *, lo: float = 0.5, hi: float = 5.0) -> float:
+    if not math.isfinite(value):
+        print(f"warn: temperature {value!r} is not finite, using 1.0")
+        return 1.0
+    return min(hi, max(lo, value))
 
 
 class Wrapper(torch.nn.Module):
@@ -69,6 +79,21 @@ prog.save(out, external_data=True)
 
 # ship the tokenizer + calibration config next to the graph
 shutil.copytree(os.path.join(model_dir, "tokenizer"), os.path.join(out_dir, "tokenizer"), dirs_exist_ok=True)
+# the runtime clamps every temperature into [0.5, 5] (upstream laya's clamp_temperature), so an out-of-range
+# value must not be re-published here: clamp and warn instead, and leave the refit to the checkpoint or to
+# scripts/finetune.py, which measures it on labelled data
+if "temperature" in cfg:
+    for i, t in enumerate(cfg["temperature"]):
+        clamped = clamp_temperature(t)
+        if math.isfinite(t) and clamped != t:
+            print(f"warn: temperature[{i}] = {t!r} out of range, clamped to {clamped!r}")
+        cfg["temperature"][i] = clamped
+if "temperature_by_options" in cfg:
+    for key, t in cfg["temperature_by_options"].items():
+        clamped = clamp_temperature(t)
+        if math.isfinite(t) and clamped != t:
+            print(f"warn: temperature_by_options[{key!r}] = {t!r} out of range, clamped to {clamped!r}")
+        cfg["temperature_by_options"][key] = clamped
 # a fine-tuned checkpoint fits one temperature per question type and drops temperature_by_options, so
 # write whichever calibration keys the checkpoint actually carries
 calib_keys = [k for k in ("max_len", "head_max_len", "temperature", "temperature_by_options") if k in cfg]

@@ -10,7 +10,19 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import * as ort from "onnxruntime-node";
 import { Tokenizer } from "@huggingface/tokenizers";
-import { buildSequence, confidenceFromProbs, QTYPES, renderOptions, softmax, tempBucket, toInternal, type SpecialIds } from "./sequence.js";
+import {
+  buildSequence,
+  clampTemperature,
+  confidenceFromProbs,
+  QTYPES,
+  renderOptions,
+  softmax,
+  TEMP_MAX,
+  TEMP_MIN,
+  tempBucket,
+  toInternal,
+  type SpecialIds,
+} from "./sequence.js";
 import { ensureBundle, type DownloadOptions } from "./download.js";
 import type { Answer, LayaConfig, Question, SystemOneResult } from "./types.js";
 
@@ -38,7 +50,7 @@ export class Laya {
     readonly modelDir: string,
     /** temperature buckets already reported as clamped, so the warning is printed once per instance */
     private readonly warnedTemps: Set<string> = new Set(),
-  ) { }
+  ) {}
 
   static async load(opts: LayaOptions = {}): Promise<Laya> {
     const modelDir = opts.modelDir ? path.resolve(opts.modelDir) : await ensureBundle(opts);
@@ -120,13 +132,13 @@ export class Laya {
       const k = it.markers.length;
       const bucket = tempBucket(it.qtype, k);
       const raw = this.config.temperature_by_options?.[bucket] ?? this.config.temperature[it.qtype] ?? 1;
-      // The reference SDK clamps temperatures into [0.5, 5]: out-of-range values (like the checkpoint's
-      // choice:11+=0.1006) would otherwise inflate confidence into near one-hot answers.
-      const temp = Math.min(5, Math.max(0.5, raw));
+      // The clamp is delegated to clampTemperature (the reference SDK's [0.5, 5] range): out-of-range values
+      // like the checkpoint's choice:11+=0.1006 would inflate confidence, and non-finite values fall back.
+      const temp = clampTemperature(raw);
       if (temp !== raw && !this.warnedTemps.has(bucket)) {
         this.warnedTemps.add(bucket);
         console.warn(
-          `laya: temperature ${bucket}=${raw} is outside [0.5, 5] and was clamped to ${temp}; treat confidence from this bucket as uncalibrated`,
+          `laya: temperature ${bucket}=${raw} is outside [${TEMP_MIN}, ${TEMP_MAX}] and was clamped to ${temp}; treat confidence from this bucket as uncalibrated`,
         );
       }
       const p = softmax(Array.from(logits.subarray(r * K, r * K + k), (v) => v / temp));
